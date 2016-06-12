@@ -58,10 +58,7 @@ public class Initialize : MonoBehaviour
         Moon.transform.localScale = new Vector3(100, 100, 100);
         Rotation Moonr = Moon.AddComponent<Rotation>();
         Moonr.Set(4f);
-        MeshRenderer mr = Moon.AddComponent<MeshRenderer>();
-        Material m = Resources.Load("18SeamlessNormalMaps512Free/Materials/W132.mat", typeof(Material)) as Material;
-        mr.material = m;
-
+        Material mat  = Resources.Load("Resources/Materials/W132.mat", typeof(Material)) as Material;
 
     }
 
