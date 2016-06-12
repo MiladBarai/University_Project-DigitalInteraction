@@ -22,16 +22,16 @@ public class Initialize : MonoBehaviour
         Rotation MS = MoonL.AddComponent<Rotation>();
 
         // Setting the Rotation Velocities
-        SS.Set(4f);
-        MS.Set(4f);
+        SS.Set(4f,"SunL");
+        MS.Set(4f,"MoonL");
 
         // Changing type to directional
         SunLcomp.type = LightType.Directional;
         MoonLcomp.type = LightType.Directional;
 
         // Allways looking at center in worldspace 
-        SunLcomp.transform.Rotate(90, 0, 0);
-        MoonLcomp.transform.Rotate(-90, 0, 0);
+        SunLcomp.transform.Rotate(-90, 0, 0);
+        MoonLcomp.transform.Rotate(90, 0, 0);
 
         Color S = new Color();
         Color M = new Color();
@@ -47,8 +47,8 @@ public class Initialize : MonoBehaviour
         MoonLcomp.intensity = 0.1f;
 
         // Set position of object
-        SunL.transform.position = new Vector3(0, 0, 0);
-        MoonL.transform.position = new Vector3(0, 0, 0);
+        SunL.transform.position = new Vector3(0, 200, 0);
+        MoonL.transform.position = new Vector3(0, -200, 0);
 
         // CREATING LIGHT SOURCES ---------------------------------------------------- End
 
@@ -58,8 +58,10 @@ public class Initialize : MonoBehaviour
         Moon.transform.localScale = new Vector3(100, 100, 100);
         Rotation Moonr = Moon.AddComponent<Rotation>();
         Moonr.Set(4f);
-        Material mat  = Resources.Load("Resources/Materials/W132.mat", typeof(Material)) as Material;
-
+        Material mat  = Resources.Load("W132", typeof(Material)) as Material;
+        MeshRenderer r = Moon.GetComponent<MeshRenderer>();
+        mat.color = Color.white;
+        r.material = mat;
     }
 
     // Update is called once per frame
