@@ -1,35 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Initialize : MonoBehaviour {
+public class Initialize : MonoBehaviour
+{
 
 
     // Use this for initialization
     void Start()
     {
+        // CREATING LIGHT SOURCES ---------------------------------------------------- Start
         // Create Light type game objects and name them
-        GameObject Sun = new GameObject("Sun");
-        GameObject Moon = new GameObject("Moon");
+        GameObject SunL = new GameObject("SunL");
+        GameObject MoonL = new GameObject("MoonL");
 
         // Componenets of the object like name, type and so on
-        Light Suncomp = Sun.AddComponent<Light>();
-        Light Mooncomp = Moon.AddComponent<Light>();
+        Light SunLcomp = SunL.AddComponent<Light>();
+        Light MoonLcomp = MoonL.AddComponent<Light>();
 
         // Add rotation script to the Components
-        Rotation SS = Sun.AddComponent<Rotation>();
-        Rotation MS = Moon.AddComponent<Rotation>();
+        Rotation SS = SunL.AddComponent<Rotation>();
+        Rotation MS = MoonL.AddComponent<Rotation>();
 
         // Setting the Rotation Velocities
         SS.Set(4f);
-        MS.Set(5f);
+        MS.Set(4f);
 
         // Changing type to directional
-        Suncomp.type = LightType.Directional;
-        Mooncomp.type = LightType.Directional;
+        SunLcomp.type = LightType.Directional;
+        MoonLcomp.type = LightType.Directional;
 
         // Allways looking at center in worldspace 
-        Suncomp.transform.Rotate(90,0,0);
-        Mooncomp.transform.Rotate(-90, 0, 0);
+        SunLcomp.transform.Rotate(90, 0, 0);
+        MoonLcomp.transform.Rotate(-90, 0, 0);
 
         Color S = new Color();
         Color M = new Color();
@@ -37,23 +39,35 @@ public class Initialize : MonoBehaviour {
         // Hex to RGB
         ColorUtility.TryParseHtmlString("#ff9933", out S);
         ColorUtility.TryParseHtmlString("#e6ffff", out M);
-        Suncomp.color = S;
-        Mooncomp.color = M;
+        SunLcomp.color = S;
+        MoonLcomp.color = M;
 
         // Setting intensity
-        Suncomp.intensity = 1.5f;
-        Mooncomp.intensity = 1f;
+        SunLcomp.intensity = 0.2f;
+        MoonLcomp.intensity = 0.1f;
 
         // Set position of object
-        Sun.transform.position = new Vector3(0, 800, 0);
+        SunL.transform.position = new Vector3(0, 0, 0);
+        MoonL.transform.position = new Vector3(0, 0, 0);
+
+        // CREATING LIGHT SOURCES ---------------------------------------------------- End
+
+        // CREATING MOON
+        GameObject Moon = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         Moon.transform.position = new Vector3(0, -800, 0);
+        Moon.transform.localScale = new Vector3(100, 100, 100);
+        Rotation Moonr = Moon.AddComponent<Rotation>();
+        Moonr.Set(4f);
+        Renderer m = Moon.AddComponent<Renderer>();
+        m.material = Resources.Load("18SeamlessNormalMaps512Free/Materials/W132", typeof(Material)) as Material;
 
 
 
     }
 
     // Update is called once per frame
-    void Update () {
-	
-	}
+    void Update()
+    {
+
+    }
 }
