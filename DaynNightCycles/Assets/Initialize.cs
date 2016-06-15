@@ -54,14 +54,24 @@ public class Initialize : MonoBehaviour
 
         // CREATING MOON
         GameObject Moon = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        Moon.transform.position = new Vector3(0, -800, 0);
-        Moon.transform.localScale = new Vector3(100, 100, 100);
+        Moon.name = "Moon";
+        Moon.transform.position = new Vector3(0, -400, 0);
+        Moon.transform.localScale = new Vector3(50, 50, 50);
         Rotation Moonr = Moon.AddComponent<Rotation>();
         Moonr.Set(4f);
         Material mat  = Resources.Load("W132", typeof(Material)) as Material;
         MeshRenderer r = Moon.GetComponent<MeshRenderer>();
         mat.color = Color.white;
         r.material = mat;
+
+        //Creating sun-object
+        GameObject Sun = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        Sun.name = "Sun";
+        Sun.transform.position = new Vector3(0, 400, 0);
+        Sun.transform.localScale = new Vector3(25, 25, 25);
+        Rotation Sunr = Sun.AddComponent<Rotation>();
+        Sunr.Set(4f);
+
     }
 
     // Update is called once per frame
