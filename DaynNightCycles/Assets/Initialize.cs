@@ -8,6 +8,9 @@ public class Initialize : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        // Changing Standard skybox with sun
+        RenderSettings.skybox= Resources.Load("SkyHigh", typeof(Material)) as Material;
+
         // CREATING LIGHT SOURCES ---------------------------------------------------- Start
         // Create Light type game objects and name them
         GameObject SunL = new GameObject("SunL");
@@ -16,6 +19,7 @@ public class Initialize : MonoBehaviour
         // Componenets of the object like name, type and so on
         Light SunLcomp = SunL.AddComponent<Light>();
         Light MoonLcomp = MoonL.AddComponent<Light>();
+
 
         // Add rotation script to the Components
         Rotation SS = SunL.AddComponent<Rotation>();
@@ -71,6 +75,14 @@ public class Initialize : MonoBehaviour
         Sun.transform.localScale = new Vector3(25, 25, 25);
         Rotation Sunr = Sun.AddComponent<Rotation>();
         Sunr.Set(4f);
+
+        //Adding glow and halo to sun
+        GameObject h = new GameObject("Halo");
+        Light hL = h.AddComponent<Light>();
+        hL.type = LightType.Point;
+        Rotation hr = h.AddComponent<Rotation>();
+        hr.Set(4f);
+
 
     }
 
