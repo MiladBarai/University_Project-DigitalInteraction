@@ -91,12 +91,21 @@ public class Initialize : MonoBehaviour
         // Rotation for sun
         Rotation Sunr = Sun.AddComponent<Rotation>();
         Sunr.Set(4f);
+
+        // Setting Material on Sun
+        mat = Resources.Load("SunMat", typeof(Material)) as Material;
+        r = Sun.GetComponent<MeshRenderer>();
+
+        // Setting Material Color
+        mat.color = S;
+        r.material = mat;
+
         // CREATING SUN -------------------------------------------------------------- End
 
         // LIGHT EFFECT ON MOON & SUN ------------------------------------------------ Start
 
         // LIGHT EFFECT ON MOON & SUN ------------------------------------------------ End
-        
+
         // Create Light type game objects and name them
         GameObject SunS = new GameObject("SunS");
         GameObject MoonS = new GameObject("MoonS");
