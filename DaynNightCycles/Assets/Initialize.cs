@@ -8,7 +8,7 @@ public class Initialize : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        // Changing Standard skybox with sun
+        // Changing the skybox (Default skybox has built in sun)
         RenderSettings.skybox= Resources.Load("SkyHigh", typeof(Material)) as Material;
 
         // CREATING LIGHT SOURCES ---------------------------------------------------- Start
@@ -16,7 +16,7 @@ public class Initialize : MonoBehaviour
         GameObject SunL = new GameObject("SunL");
         GameObject MoonL = new GameObject("MoonL");
 
-        // Componenets of the object like name, type and so on
+        // Add Component light
         Light SunLcomp = SunL.AddComponent<Light>();
         Light MoonLcomp = MoonL.AddComponent<Light>();
 
@@ -26,14 +26,14 @@ public class Initialize : MonoBehaviour
         Rotation MS = MoonL.AddComponent<Rotation>();
 
         // Setting the Rotation Velocities
-        SS.Set(4f,"SunL");
-        MS.Set(4f,"MoonL");
+        SS.Set(4f);
+        MS.Set(4f);
 
         // Changing type to directional
         SunLcomp.type = LightType.Directional;
         MoonLcomp.type = LightType.Directional;
 
-        // Allways looking at center in worldspace 
+        // Start Looking at Center in Worldspaced when loaded
         SunLcomp.transform.Rotate(-90, 0, 0);
         MoonLcomp.transform.Rotate(90, 0, 0);
 
@@ -56,32 +56,80 @@ public class Initialize : MonoBehaviour
 
         // CREATING LIGHT SOURCES ---------------------------------------------------- End
 
-        // CREATING MOON
-        GameObject Moon = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        // CREATING MOON ------------------------------------------------------------- Start
+
+        // Using a Prefab sphere with a Halo
+        GameObject Moon = (GameObject)Instantiate(Resources.Load("MoonSphere"));
         Moon.name = "Moon";
+
+        // Placement for moon
         Moon.transform.position = new Vector3(0, -400, 0);
         Moon.transform.localScale = new Vector3(50, 50, 50);
+
+        // Rotation Script for moon
         Rotation Moonr = Moon.AddComponent<Rotation>();
         Moonr.Set(4f);
+
+        // Setting Material on Moon
         Material mat  = Resources.Load("W132", typeof(Material)) as Material;
         MeshRenderer r = Moon.GetComponent<MeshRenderer>();
+
+        // Setting Material Color
         mat.color = Color.white;
         r.material = mat;
+        // CREATING MOON ------------------------------------------------------------- End
 
-        //Creating sun-object
-        GameObject Sun = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        // CREATING SUN -------------------------------------------------------------- Start
+        // Using a Prefab sphere with a halo
+        GameObject Sun = (GameObject)Instantiate(Resources.Load("SunSphere"));
         Sun.name = "Sun";
+
+        // Placement for sun
         Sun.transform.position = new Vector3(0, 400, 0);
         Sun.transform.localScale = new Vector3(25, 25, 25);
+
+        // Rotation for sun
         Rotation Sunr = Sun.AddComponent<Rotation>();
         Sunr.Set(4f);
+        // CREATING SUN -------------------------------------------------------------- End
 
-        //Adding glow and halo to sun
-        GameObject h = new GameObject("Halo");
-        Light hL = h.AddComponent<Light>();
-        hL.type = LightType.Point;
-        Rotation hr = h.AddComponent<Rotation>();
-        hr.Set(4f);
+        // LIGHT EFFECT ON MOON & SUN ------------------------------------------------ Start
+
+        // LIGHT EFFECT ON MOON & SUN ------------------------------------------------ End
+        
+        // Create Light type game objects and name them
+        GameObject SunS = new GameObject("SunS");
+        GameObject MoonS = new GameObject("MoonS");
+
+        // Add Component light
+        Light SunSc = SunS.AddComponent<Light>();
+        Light MoonSc = MoonS.AddComponent<Light>();
+
+
+        // Add rotation script to the Components
+        (SunS.AddComponent<Rotation>()).Set(4f);
+        (MoonS.AddComponent<Rotation>()).Set(4f);
+        
+        // Changing type to point
+        SunSc.type = LightType.Point;
+        MoonSc.type = LightType.Point;
+
+        // Changing color
+        SunSc.color = S;
+        MoonSc.color = M;
+
+        // Changing range
+        SunSc.range = 100;
+        MoonSc.range = 100;
+
+        SunS.transform.position = new Vector3(0,380,0);
+        MoonS.transform.position = new Vector3(0, -350, 0);
+
+        // Milad : Tried adding Point Lights infront of spheres hoping they would light up they did not ..
+
+
+
+
 
 
     }
