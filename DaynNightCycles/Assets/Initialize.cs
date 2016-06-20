@@ -101,46 +101,6 @@ public class Initialize : MonoBehaviour
         r.material = mat;
 
         // CREATING SUN -------------------------------------------------------------- End
-
-        // LIGHT EFFECT ON MOON & SUN ------------------------------------------------ Start
-
-        // LIGHT EFFECT ON MOON & SUN ------------------------------------------------ End
-
-        // Create Light type game objects and name them
-        GameObject SunS = new GameObject("SunS");
-        GameObject MoonS = new GameObject("MoonS");
-
-        // Add Component light
-        Light SunSc = SunS.AddComponent<Light>();
-        Light MoonSc = MoonS.AddComponent<Light>();
-
-
-        // Add rotation script to the Components
-        (SunS.AddComponent<Rotation>()).Set(4f);
-        (MoonS.AddComponent<Rotation>()).Set(4f);
-        
-        // Changing type to point
-        SunSc.type = LightType.Point;
-        MoonSc.type = LightType.Point;
-
-        // Changing color
-        SunSc.color = S;
-        MoonSc.color = M;
-
-        // Changing range
-        SunSc.range = 100;
-        MoonSc.range = 100;
-
-        SunS.transform.position = new Vector3(0,380,0);
-        MoonS.transform.position = new Vector3(0, -350, 0);
-
-        // Milad : Tried adding Point Lights infront of spheres hoping they would light up they did not ..
-
-
-
-
-
-
     }
 
     // Update is called once per frame
