@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Initialize : MonoBehaviour
 {
-
+    public GameObject SunL;
+    public GameObject MoonL;
 
     // Use this for initialization
     void Start()
@@ -12,13 +13,9 @@ public class Initialize : MonoBehaviour
         RenderSettings.skybox= Resources.Load("SkyHigh", typeof(Material)) as Material;
 
         // CREATING LIGHT SOURCES ---------------------------------------------------- Start
-        // Create Light type game objects and name them
-        GameObject SunL = new GameObject("SunL");
-        GameObject MoonL = new GameObject("MoonL");
-
         // Add Component light
-        Light SunLcomp = SunL.AddComponent<Light>();
-        Light MoonLcomp = MoonL.AddComponent<Light>();
+        Light SunLcomp = SunL.GetComponent<Light>();
+        Light MoonLcomp = MoonL.GetComponent<Light>();
 
 
         // Add rotation script to the Components
@@ -28,10 +25,6 @@ public class Initialize : MonoBehaviour
         // Setting the Rotation Velocities
         SS.Set(4f);
         MS.Set(4f);
-
-        // Changing type to directional
-        SunLcomp.type = LightType.Directional;
-        MoonLcomp.type = LightType.Directional;
 
         // Start Looking at Center in Worldspaced when loaded
         SunLcomp.transform.Rotate(-90, 0, 0);
