@@ -34,14 +34,18 @@ public class Initialize : MonoBehaviour
         Color M = new Color();
 
         // Hex to RGB
-        ColorUtility.TryParseHtmlString("#ff9933", out S);
+        ColorUtility.TryParseHtmlString("#FFFBAAFF", out S);
         ColorUtility.TryParseHtmlString("#e6ffff", out M);
         SunLcomp.color = S;
         MoonLcomp.color = M;
 
         // Setting intensity
-        SunLcomp.intensity = 0.2f;
-        MoonLcomp.intensity = 0.1f;
+        /*SunLcomp.intensity = 0.2f;
+        MoonLcomp.intensity = 0.1f;*/
+
+        //NOTE! Changed to static values due to
+        //awkward coding when trying to share
+        //these values between scripts
 
         // Set position of object
         SunL.transform.position = new Vector3(0, 200, 0);
